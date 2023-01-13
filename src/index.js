@@ -6,7 +6,7 @@ import { createServer } from "node:http";
 // ? base de dados
 import { usuarios } from "./database/users";
 import { ambientes } from "./database/environments";
-import { participacoes } from "./database/participate";
+import { participacoes } from "./database/holdings";
 import { mensagens } from "./database/messages";
 
 // schema -> objeto que agrupa as funcionalidades que existem no servidor, interfaces e resolvers
@@ -86,12 +86,7 @@ const schema = createSchema({
                 const idAmbientes = participacoes
                     .filter((p) => p.usuario === parent.id)
                     .map((pu) => pu.ambiente);
-                const idAmbientesUnicos = [];
-                idAmbientes.forEach((id) =>
-                    idAmbientesUnicos.indexOf(id) < 0
-                        ? idAmbientesUnicos.push(id)
-                        : false
-                );
+                const idAmbientesUnicos = [...new Set(idAmbientes)];
                 return ambientes.filter((a) =>
                     idAmbientesUnicos.includes(a.id)
                 );
