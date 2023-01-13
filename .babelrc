@@ -1,0 +1,5 @@
+// preset que o compilador babel precisa utilizar
+
+{
+    "presets": ["env"] // env é o preset que foi utilizado com babel-preset-env
+}
